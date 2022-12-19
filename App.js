@@ -1,13 +1,6 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+
 
 import React,{useEffect} from 'react';
-// import { useFocusEffect,CommonActions,TabActions } from '@react-navigation/native';
 import {
   SafeAreaView,
   ScrollView,
@@ -33,41 +26,18 @@ export default function Planning(){
   const [startTime, set_startTime] = React.useState(0);
   const [previousShow, setPreviousShow] = React.useState('');
   const check_all_plans = async() =>{
-    // AsyncStorage.setItem('@all_plans', 'null');
     const asyncData = await AsyncStorage.getItem('@all_plans');
     if(asyncData != null && asyncData != 'null'){
       let data = JSON.parse(asyncData);
       let lastTime = returnSentTime(data[0]._startTime);
-      // console.log(lastTime);
       set_all_plans(data);
       setPreviousShow(lastTime);
-      // console.log(data);
     }
     
   }
 
-  // const startTimer=()=>{
-  //   set_TimeOn(true);
-  //   let interval = null;
-  //   interval = setInterval(()=>{
-  //     setTime(prevTime => prevTime + 10)
-  //   },10)
-  // }
-  // const stopTimer=()=>{
-  //   set_TimeOn(false);
-  //   setTime(0);
-  //   clearInterval(null);
-  // }
   const createInitalStart = () =>{
     set_startTime(Date.now());
-    // let all_plans_data = all_plans;
-    // let time = {
-    //   startTime:Date.now(),
-    //   timeSpent:null,
-    //   endTime:null,
-    // };
-    // all_plans_data.push(time);
-    // AsyncStorage.setItem('@all_plans', JSON.stringify(all_plans_data));
   }
 
   const getTheTotalHours = () =>{
@@ -195,17 +165,11 @@ export default function Planning(){
           index == 0?(
               <DateInfo
                 item={item}
-                // onPress={() => setSelectedId(item.id)}
-                // backgroundColor={{ backgroundColor }}
-                // textColor={{ color }}
               />
           ):(
             checkDateChange(item._startTime) == true?(
               <DateInfo
                 item={item}
-                // onPress={() => setSelectedId(item.id)}
-                // backgroundColor={{ backgroundColor }}
-                // textColor={{ color }}
               />
             ):(null)
           )
@@ -254,9 +218,7 @@ export default function Planning(){
               onChangeText={onchange_plan_title}
               value={plan_title}
               placeholder="What are you doing ?"
-              //keyboardType="numeric"
             />
-            {/* <Text style={styles.header_info}> What are you doing ?</Text> */}
             <View style={styles.timeInfo}>
               <Text style={styles.header_info_time}> {("0"+Math.floor((time/60000)%60)).slice(-2)}:</Text>
               <Text style={styles.header_info_time}> {("0"+Math.floor((time/1000)%60)).slice(-2)}:</Text>
@@ -296,7 +258,6 @@ const styles = StyleSheet.create({
     flex:1,
     width:'100%',
     backgroundColor:'#e6e6e5',
-    // paddingBottom:80,
   },
   header_section:{
     backgroundColor:'#ffffff',
@@ -312,7 +273,6 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 55,
-    // margin: 12,
     borderWidth: 1,
     borderColor:'#e6e6e5',
     borderRadius:10,
@@ -357,14 +317,10 @@ const styles = StyleSheet.create({
   plans_main_section:{
     alignItems:'center',
     marginBottom:'10%',
-    //backgroundColor:'red',
-    // paddingBottom:50,
   },
   plans:{
     marginTop:'0%',
     width:'95%',
-    // backgroundColor:'#ffffff',
-    // borderRadius:10,
   },
   plan_header:{
     paddingHorizontal:15,
@@ -372,8 +328,6 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     backgroundColor:'#ffffff',
-    // borderTopLeftRadius:10,
-    // borderTopRightRadius:10,
     marginTop:10,
   },
   plan_header_title:{
@@ -412,8 +366,6 @@ const styles = StyleSheet.create({
     height:10,
   },
   footerStyle:{
-    // backgroundColor:'red',
     height:50,
-    // width:200,
   }
 });
